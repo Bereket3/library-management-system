@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduShelf</title>
+  <link rel="stylesheet" href="../CSS/about.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="../img/EduShelf_  Managing Books with Ease.jpg" alt="Logo">
+      <h1>EduShelf</h1>
+    </div>
+    <div class="menu-toggle">☰</div> 
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#About">About</a></li>
+      <li><a href="#Books">Books</a></li>
+    </ul>
+  </nav>
+
+  <div class="mobile-nav"> 
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#About">About</a></li>
+      <li><a href="#Books">Books</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h1>Welcome to the EduShelf</h1>
+    <p> Managing Books with Ease</p>
+    <h4>Want to be a Memebr? 👇</h4>
+    <button id="StartedBtn" class="cta">Get Started</button>
+  </section>
+
+  <!-- Books Section -->
+  <section id="Books" class="book-grid">
+    <h2>Available Books</h2>
+    <div class="grid">
+        <!-- Book Item -->
+        <div class="book-item">
+            <img src="../img/book1.png" alt="Book Title 1">
+            <h3>Dreams and Stories</h3>
+            <p>by Author Name</p>
+        </div>
+        <div class="book-item">
+            <img src="../img/book2.png" alt="Book Title 2">
+            <h3>Flight Book</h3>
+            <p>by Author Name</p>
+        </div>
+        <div class="book-item">
+            <img src="../img/book3.png" alt="Book Title 3">
+            <h3>Life</h3>
+            <p>by Author Name</p>
+        </div>
+        <div class="book-item">
+            <img src="../img/book4.png" alt="Book Title 4">
+            <h3>Winter</h3>
+            <p>by Author Name</p>
+        </div>
+        <div class="book-item">
+            <img src="../img/book5.png" alt="Book Title 5">
+            <h3>Be Modest</h3>
+            <p>by Author Name</p>
+        </div>
+        <div class="book-item">
+            <img src="../img/book6.png" alt="Book Title 6">
+            <h3>Report</h3>
+            <p>by Author Name</p>
+        </div>
+        <div class="book-item">
+            <img src="../img/book7.png" alt="Book Title 7">
+            <h3>Annual Report</h3>
+            <p>by Author Name</p>
+        </div>
+        <div class="book-item">
+            <img src="../img/book8.png" alt="Book Title 8">
+            <h3>Book Cover</h3>
+                <p>by Author Name</p>
+            </div>
+        <div class="book-item">
+            <img src="../img/book2.png" alt="Book Title 8">
+            <h3>Flight Book</h3>
+                <p>by Author Name</p>
+            </div>
+        </div>
+        <button class="cta1">Show More</button>
+    </div>
+  </section>
+
+  <div id="About" class="about-section">
+    <div class="container">
+        <h1>About Us</h1>
+        <p>
+            Welcome to Library Management System (LibraryMS)! Our mission is to provide seamless
+            management of library resources, allowing users to borrow, return, and explore books effortlessly.
+        </p>
+        <p>
+            With a user-friendly platform, we aim to connect readers with knowledge while empowering
+            library administrators to manage their collections efficiently.
+        </p>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div id="register-section" class="modal">
+    <div class="container">
+        <h2>Register</h2>
+        <input id="name" type="text" placeholder="FullName" required>
+        <input id="email" type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <h2>I am a</h2>
+        <select id="Register-role">
+          <option value="client">Member</option>
+          <option value="lawyer">Librarian</option>
+        </select>
+        <button class="modal-btn" id="signupSubmit">Register</button>
+        <p>Already have an account? <a href="#" id="toLogin">Login here</a></p>
+      <div class="third-party-login">
+        <button type="button" class="icon-btn">
+            <img src="../assets/img/Google.png" alt="Google Logo">
+            <a href="https://accounts.google.com/"> Login with Google</a>
+        </button>
+        <button type="button" class="icon-btn">
+            <img src="../assets/img/Facebook.png" alt="Facebook Logo">
+            <a href="https://www.facebook.com/login.php/"> Login with Facebook</a>
+        </button>
+        <button type="button" class="icon-btn">
+            <img src="../assets/img/Linkedin.png" alt="LinkedIn Logo">
+            <a href="https://www.linkedin.com/login"> Login with LinkedIn</a>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="login-section" class="modal">
+    <div class="container">
+        <h2>Login</h2>
+        <input id="email" type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <h2>I am a</h2>
+        <select id="login-role">
+          <option value="client">Member</option>
+          <option value="lawyer">Librarian</option>
+        </select>
+        <button class="modal-btn" id="loginSubmit">Login</button>
+        <p>Don't have an account? <a href="#" id="toSignup">Register here</a></p>
+      <div class="third-party-login">
+        <button type="button" class="icon-btn">
+            <img src="../assets/img/Google.png" alt="Google Logo">
+            <a href="https://accounts.google.com/"> Login with Google</a>
+        </button>
+        <button type="button" class="icon-btn">
+            <img src="../assets/img/Facebook.png" alt="Facebook Logo">
+            <a href="https://www.facebook.com/login.php/"> Login with Facebook</a>
+        </button>
+        <button type="button" class="icon-btn">
+            <img src="../assets/img/Linkedin.png" alt="LinkedIn Logo">
+            <a href="https://www.linkedin.com/login"> Login with LinkedIn</a>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduShelf. All rights reserved.</p>
+  </footer>
+
+  <script src="../TS/script2.js"></script>
+</body>
+</html>

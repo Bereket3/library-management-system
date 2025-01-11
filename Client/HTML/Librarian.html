@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librarian Dashboard</title>
+  <link rel="stylesheet" href="../CSS/Librarian.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <a href="#home" class="logo"><img src="../img/EduShelf_  Managing Books with Ease.jpg" alt="EduShelf"><h1>EduShelf</h1></a>
+        <ul class="nav-links">
+          <li><a href="#home" class="active">HOME</a></li>
+          <li><a href="../HTML/home.html" id="LogOut">LogOut</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="book-grid">
+      <div class="container">
+        <h2>Available Books</h2>
+        <div class="grid">
+          <div class="book-item">
+            <img src="../img/book1.png" alt="Book Title 1">
+            <h3>Dreams and Stories</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="book-item">
+            <img src="../img/book2.png" alt="Book Title 2">
+            <h3>Flight Book</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="book-item">
+            <img src="../img/book3.png" alt="Book Title 3">
+            <h3>Life</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="book-item">
+            <img src="../img/book4.png" alt="Book Title 4">
+            <h3>Winter</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="book-item">
+            <img src="../img/book5.png" alt="Book Title 5">
+            <h3>Be Modest</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="book-item">
+            <img src="../img/book6.png" alt="Book Title 6">
+            <h3>Report</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="book-item">
+            <img src="../img/book7.png" alt="Book Title 7">
+            <h3>Annual Report</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="book-item">
+            <img src="../img/book8.png" alt="Book Title 8">
+            <h3>Book Cover</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="book-item">
+            <img src="../img/book2.png" alt="Book Title 8">
+            <h3>Flight Book</h3>
+            <p>by Author Name</p>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="approvals-section">
+      <h2>Pending User Approvals</h2>
+      <div id="pending-users"></div>
+    </section>
+  </main>
+
+  <div id="book-modal" class="modal">
+    <div class="modal-content">
+      <h3 id="bookModalTitle">Add Book</h3>
+      <input type="text" id="bookTitle" placeholder="Enter your name">
+      <input type="email" id="editEmail" placeholder="Enter Email">
+      <input type="file" id="bookCover" accept="image/*"> 
+      <button id="saveBookBtn" class="cta">Save</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Library Management System. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="../TS/Librarian.js"></script> 
+</body>
+</html>
