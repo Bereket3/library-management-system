@@ -30,18 +30,15 @@ export class AuthService {
         if (!name || typeof(name) !== "string" || !email || !password || typeof(email) !== "string" || typeof(password) !== "string") {
             throw new HttpException("invalid data", HttpStatus.BAD_REQUEST)
         }
-
         // Hash password before saving
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        
 
         // Create new user
         const user = await this.useModel.create({
             name,
             email,
             password: hashedPassword,
-            role: role == "Librarian" ? Role.Admin : Role.User,
+            role: role === "Librarian" ? Role.Admin : Role.User,
         });
 
         // Generate JWT token
@@ -77,14 +74,22 @@ export class AuthService {
     }
     
     async getUsersByApprovalStatus(isApproved: boolean): Promise<User[]> {
-        const result = (await this.useModel.find().exec()).filter((user) => user.isApproved === isApproved);
+        const result = (await this.useModel.find().exec()).filter((user) => user.isApproved === isApproved && !user.role.includes(Role.Admin));
         return result
     }
 
-    async approveUser(userId: string): Promise<User> {
-        const user = await this.useModel.findByIdAndUpdate(userId, {
-            isApproved: true,
+    async approveUser(userId: string, status: boolean): Promise<User> {
+        const userToBeApproved = await this.useModel.findByIdAndUpdate(userId, {
+            isApproved: !status,
+            isReject: status,
         }, {new:true});
-        return user
+        return userToBeApproved
     }
+    async getUserByEmail(email: string): Promise<User> {
+        const user = await this.useModel.findOne({email});
+        if(!user) {
+            throw new HttpException("there is no user by this ID", HttpStatus.NOT_FOUND)
+        }
+        return user;
+    } 
 }

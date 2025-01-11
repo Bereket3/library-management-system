@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {  IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import {  IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class LoginDto {
     @IsNotEmpty()
@@ -15,4 +15,14 @@ export class ApprovalDto {
   @IsNotEmpty()
   @IsString()
   readonly userId: string;
+
+  @IsString()
+  @IsOptional()
+  readonly isApproved: string;
+}
+
+export class EmailDto {
+  @IsNotEmpty()
+  @IsString()
+  readonly email: string;
 }

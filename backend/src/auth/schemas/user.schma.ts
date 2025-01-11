@@ -17,7 +17,9 @@ export class User extends Document {
   @Prop({ default: false })
   isApproved: boolean;
 
-  // Explicitly define _id to make it accessible
+  @Prop({ default: false })
+  isReject: boolean;
+
   readonly _id: string;
   @Prop({
       type:[{ type:String , enum:Role}],

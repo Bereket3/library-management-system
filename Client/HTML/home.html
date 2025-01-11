@@ -254,7 +254,7 @@
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: bodyStr
+                    body: bodyStr,
                 }
                 fetch(BASE_URL + 'auth/login/', options)
                 .then(async response => {
@@ -267,7 +267,25 @@
                         loginForm.reset()
                     } else {
                         await localStorage.setItem('Token', res.data.token)
-                        window.location.href = "./Member.html"
+                        console.log(loginObjectData.email)
+                        await fetch(BASE_URL + 'auth/user/', {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${res.data.token}`,
+                            },
+                            body: JSON.stringify({
+                                email: loginObjectData.email
+                            })
+                        })
+                        .then(res => res.json())
+                        .then(res => {
+                            if(res.role[0] === "Member") {
+                                window.location.href = "./Member.html"
+                            } else {
+                                window.location.href = "./Librarian.html"
+                            }
+                        })
                     }
                 })
                 .catch((err) => {

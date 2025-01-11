@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Librarian Dashboard</title>
   <link rel="stylesheet" href="../CSS/Librarian.css">
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 </head>
 <body>
   <header>
@@ -91,9 +92,10 @@
       </div>
     </section>
 
-    <section id="approvals-section">
-      <h2>Pending User Approvals</h2>
-      <div id="pending-users"></div>
+    <section class="" id="approvals-section">
+      <h2 class="text-center py-5">Pending User Approvals</h2>
+      <div id="errorContainer" class="bg-gradient-danger text-center"></div>
+      <div class="px-4 d-flex flex-column " id="pending-users"></div>
     </section>
   </main>
 
@@ -113,5 +115,89 @@
     </div>
   </footer>
   <script src="../TS/Librarian.js"></script> 
+  <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const BASE_URL = "http://localhost:7000/"
+    const pendingUsers = document.getElementById("pending-users");
+    const errorContainer = document.getElementById('errorContainer');
+
+    function displayError(message) {
+        const errorAlert = document.createElement('div');
+        errorAlert.className = 'alert alert-danger alert-dismissible fade show';
+        errorAlert.role = 'alert';
+        errorAlert.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        errorContainer.appendChild(errorAlert);
+    }
+
+    async function approveUser(userId, isApproved) {
+      const data = new FormData()
+      data.append("userId", userId)
+      data.append("isApproved", isApproved ? "true" : "false")
+      const toSend = Object.fromEntries(data)
+
+      const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('Token')}`,
+        },
+        body: JSON.stringify(toSend)
+      }
+      fetch(BASE_URL + 'auth/approve/', options)
+      .then(async res => {
+        if(res.status !== 200) {
+          switch (res.status) {
+            case 401:
+              displayError("It seens your session has ended. Log again!")
+              setTimeout(() => window.location.href = "./home.html", 1000)
+              break;
+            case 403:
+              displayError("You Don't have permission to do these action")
+              break
+            default:
+              displayError("There is un expected error!")
+              break;
+          }
+        } else {
+          const removableElement = document.getElementById(`user_${userId}`)
+          removableElement.remove()
+        }
+      })
+    }
+
+    async function collectUsers() {
+      const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+      }
+      fetch(BASE_URL + 'auth/filter-by-approval/?isApproved=false', options)
+      .then(async res => await res.json())
+      .then(res => {
+        res.forEach((user) => {
+          if(!user.isApproved && !user.isReject) {
+            const userHTML = `
+              <div class="alert alert-warning alert-dismissible fade show" id="user_${user._id}" role="alert">
+                <strong>Name: ${user.name}</strong>
+                <p>Email: ${user.email}</p>
+                <p>Role: ${user.role.join(', ')}</p>
+                <button type="button" class="btn btn-primary" onclick="approveUser('${user._id}', ${true})">Approve</button>
+                <button type="button" class="btn btn-danger float-end" onclick="approveUser('${user._id}', ${false})">Reject</button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            `;
+            pendingUsers.innerHTML += userHTML;
+          }
+        });
+      })
+      .catch(err => console.log(err))
+    }
+
+    document.addEventListener("DOMContentLoaded", collectUsers())
+  </script>
 </body>
 </html>
