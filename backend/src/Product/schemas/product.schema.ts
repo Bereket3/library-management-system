@@ -11,7 +11,7 @@ export class Product extends Document {
   description: string;
 
   @Prop()
-  price: string;
+  bookName: string;
 
   @Prop({
     default: null

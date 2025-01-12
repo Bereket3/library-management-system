@@ -1,9 +1,8 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/signup.dto';
 import { ApprovalDto, EmailDto, LoginDto, UpdateDto } from './dto/login.dto';
-import { JwtStrategy } from './jwt.startegy';
 import { Roles } from './decorators/roles.decorator';
 import { Role } from './enums/role.enums';
 import { Public } from './decorators/public.decorator';

@@ -13,7 +13,7 @@ export class CreateProductDto {
   
   @IsNotEmpty()
   @IsString()
-  price: string;
+  bookName: string;
  
   @IsString()
   @IsOptional()

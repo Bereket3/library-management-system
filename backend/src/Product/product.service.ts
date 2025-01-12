@@ -11,7 +11,7 @@ interface CreateData {
   name: string,
   description: string | null | undefined, 
   category: string,
-  price: string,
+  bookName: string,
   image: string,
   book: string,
 }
@@ -20,7 +20,7 @@ interface UpdateData {
   name?: string,
   description?: string | null | undefined, 
   category?: string,
-  price?: string,
+  bookName?: string,
   image?: string,
   book?: string,
 }

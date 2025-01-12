@@ -19,7 +19,7 @@ export class UpdateProductDto {
 
   @IsOptional()
   @IsString()
-  price?: string;
+  bookName?: string;
 
   @IsOptional()
   @IsString()

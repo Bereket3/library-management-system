@@ -153,11 +153,11 @@
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" placeholder="Create a password" required>
                     </div>
-                    <h2>I am a</h2>
+                    <!-- <h2>I am a</h2>
                     <select id="role">
                         <option value="Member">Member</option>
                         <option value="Librarian">Librarian</option>
-                    </select>
+                    </select> -->
                     <button type="submit" id="registerSubmit" class="cta">Register</button>
                     <p>Already have an account? <a href="#" id="toLogin">Login here</a></p>
                 </form>
@@ -297,8 +297,8 @@
             function handelRegisteration(e) {
                 e.preventDefault()
                 let registerFormData = new FormData(registerForm)
-                const role = document.getElementById('role').value;
-                registerFormData.append('role',  role)
+                // const role = document.getElementById('role').value;
+                registerFormData.append('role',  "Member")
                 let registerObjectData = Object.fromEntries(registerFormData)
                 let bodyStr = JSON.stringify(registerObjectData)
 
@@ -321,16 +321,7 @@
                         loginForm.reset()
                     } else {
                         await localStorage.setItem('Token', res.data.token)
-                        switch (role) {
-                            case "Member":
-                                window.location.href = "./Member.html"
-                                break;
-                            case "Librarian":
-                                window.location.href = "./Librarian.html"
-                                break
-                            default:
-                                break;
-                        }
+                        window.location.href = "./Member.html"
                     }
                 })
                 .catch((err) => {

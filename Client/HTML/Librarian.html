@@ -66,8 +66,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="price">Price</label>
-              <input type="number" class="form-control" name="price" id="price" placeholder="Enter Price" required>
+              <label for="bookName">Book Name</label>
+              <input type="text" class="form-control" name="bookName" id="bookName" placeholder="Enter Price" required>
             </div>
             <div class="form-group">
               <label for="exampleFormControlTextarea1">Description</label>
@@ -127,7 +127,7 @@
             </div>
             <div class="form-group">
               <label for="price">Price</label>
-              <input type="number" class="form-control" name="priceEdit" id="priceEdit" placeholder="Enter Price">
+              <input type="text" class="form-control" name="bookNameEdit" id="bookNameEdit" placeholder="Enter Price">
             </div>
             <div class="form-group">
               <label for="exampleFormControlTextarea1">Description</label>
@@ -262,14 +262,14 @@
         e.preventDefault()
         let BookFormData = new FormData()
         const name = document.getElementById('nameEdit')
-        const price = document.getElementById('priceEdit')
+        const price = document.getElementById('bookNameEdit')
         const description = document.getElementById('descriptionEdit')
         const category = document.getElementById('categoryEdit')
         const image = document.getElementById('ImageEdit').files[0]
         const book = document.getElementById('bookEdit').files[0]
 
         BookFormData.append("name", name.value)
-        BookFormData.append("price", price.value)
+        BookFormData.append("bookName", price.value)
         BookFormData.append("description", description.value)
         BookFormData.append("category", category.value)
         BookFormData.append("image", image)
@@ -326,14 +326,14 @@
       e.preventDefault()
       let BookFormData = new FormData()
       const name = document.getElementById('name')
-      const price = document.getElementById('price')
+      const price = document.getElementById('bookName')
       const description = document.getElementById('description')
       const category = document.getElementById('category')
       const image = document.getElementById('Image').files[0]
       const book = document.getElementById('book').files[0]
 
       BookFormData.append("name", name.value)
-      BookFormData.append("price", price.value)
+      BookFormData.append("bookName", price.value)
       BookFormData.append("description", description.value)
       BookFormData.append("category", category.value)
       BookFormData.append("image", image)
@@ -405,8 +405,10 @@
         } else {
           const removableElement = document.getElementById(`user_${userId}`)
           removableElement.remove()
+          collectUsers()
         }
       })
+      .catch(err => console.log(err))
     }
 
     async function collectUsers() {

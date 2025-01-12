@@ -53,7 +53,7 @@ export class ProductController {
       name: createProductDto.name,
       description: createProductDto.description, 
       category: createProductDto.category,
-      price: createProductDto.price,
+      bookName: createProductDto.bookName,
       image: files.image[0].filename,
       book: files.book[0].filename,
     }
@@ -106,8 +106,8 @@ export class ProductController {
     if(updateProductDto.description) {
       constractedData["description"] = updateProductDto.description
     }
-    if(updateProductDto.price) {
-      constractedData["price"] = updateProductDto.price
+    if(updateProductDto.bookName) {
+      constractedData["bookName"] = updateProductDto.bookName
     }
     if(files.image) {
       constractedData["image"] = files.image[0]?.filename

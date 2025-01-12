@@ -20,7 +20,6 @@ export class AuthService {
 
     async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
         const { name, email, password, role } = signUpDto;
-        console.log(role)
         const existingUser = await this.useModel.findOne({ email });
 
         if (existingUser) {
@@ -96,5 +95,24 @@ export class AuthService {
 
     async update(id, update: UpdateDto) {
         return await this.useModel.findByIdAndUpdate(id, update, {new: true})
+    }
+
+    async createLibrarian(email: string, password: string, name: string): Promise<User> {
+        const existingUser = await this.useModel.findOne({ email });
+
+        if (existingUser) {
+            return existingUser;
+        }
+        
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = await this.useModel.create({
+            name,
+            email,
+            password: hashedPassword,
+            role: Role.Admin,
+            isApproved: true,
+        });
+        return user;
     }
 }
