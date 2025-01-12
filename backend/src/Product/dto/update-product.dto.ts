@@ -1,15 +1,10 @@
 /* eslint-disable prettier/prettier */
-import {IsNotEmpty, IsString, IsNumber, IsEnum, IsOptional } from 'class-validator';
+import { IsString, IsEnum, IsOptional } from 'class-validator';
 import { ProductCategory } from './enum/ProductCategory';
 
 
 
 export class UpdateProductDto {
-
- @IsNotEmpty()
- @IsString()
- id?: string;
-
   @IsOptional()
   @IsString()
   name?: string;
@@ -23,14 +18,14 @@ export class UpdateProductDto {
   image?: string;
 
   @IsOptional()
-  @IsNumber()
-  oldPrice?: number;
+  @IsString()
+  price?: string;
 
   @IsOptional()
-  @IsNumber()
-  newPrice?: number;
+  @IsString()
+  description?: string;
 
   @IsOptional()
-  @IsNumber()
-  quantity?: number;
+  @IsString()
+  book?: number;
 }

@@ -7,75 +7,119 @@ import {
   Param,
   Patch,
   Delete,
-  Query,
   UseInterceptors,
-  UploadedFile,
+  UploadedFiles,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { Public } from 'src/auth/decorators/public.decorator';
 import { extname } from 'path';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/auth/enums/role.enums';
+import { IsApprovedOrIsAdmin } from './guards/approval.guard';
+
+const storage = diskStorage({
+  destination: './uploads/images',
+  filename: (req, file, callback) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const ext = extname(file.originalname);
+    callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+  },
+})
 
 @Controller('products')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post()
+  @Post('/create')
+  @Roles(Role.Admin)
   @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: './uploads/images', // Set the folder for storing images
-        filename: (req, file, callback) => {
-          // Generate a unique filename with the original extension
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname);
-          callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
-        },
-      }),
-      fileFilter: (req, file, callback) => {
-        // Only accept image files (e.g., jpg, png, gif)
-        if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Only image files are allowed'), false);
-        }
-      },
-    }),
+    FileFieldsInterceptor([
+      {name: "image", maxCount: 1},
+      {name: "book", maxCount: 1}
+    ], {
+      storage: storage
+    })
   )
-  async create(@Body() createProductDto: CreateProductDto, @UploadedFile() file: Express.Multer.File) {
-    if (file) {
-      // Store the file path in the DTO
-      createProductDto.image = `/uploads/images/${file.filename}`;
+  async create(@Body() createProductDto: CreateProductDto, @UploadedFiles() files: {
+    image?: Express.Multer.File[];
+    book?: Express.Multer.File[];
+  }) {
+    const creatData = {
+      name: createProductDto.name,
+      description: createProductDto.description, 
+      category: createProductDto.category,
+      price: createProductDto.price,
+      image: files.image[0].filename,
+      book: files.book[0].filename,
     }
-    return this.productService.create(createProductDto);
+    return this.productService.create(creatData);
   }
 
   @Get()
+  @UseGuards(IsApprovedOrIsAdmin)
   async findAll() {
     return this.productService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(IsApprovedOrIsAdmin)
   async findOne(@Param('id') id: string) {
     return this.productService.findOne(id);
   }
 
   @Get('/category/:category')
+  @Public()
   async findByCategory(@Param('category') category: string) {
     return this.productService.findByCategory(category);
   }
 
   @Patch(':id')
+  @Roles(Role.Admin)
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      {name: "image", maxCount: 1},
+      {name: "book", maxCount: 1}
+    ], {
+      storage: storage
+    })
+  )
   async update(
     @Param('id') id: string,
     @Body() updateProductDto: UpdateProductDto,
+    @UploadedFiles() files: {
+      image?: Express.Multer.File[];
+      book?: Express.Multer.File[];
+    }
   ) {
-    return this.productService.update(id, updateProductDto);
+    const constractedData = {}
+    if(updateProductDto.name) {
+      constractedData["name"] = updateProductDto.name
+    }
+    if(updateProductDto.category) {
+      constractedData["category"] = updateProductDto.category
+    }
+    if(updateProductDto.description) {
+      constractedData["description"] = updateProductDto.description
+    }
+    if(updateProductDto.price) {
+      constractedData["price"] = updateProductDto.price
+    }
+    if(files.image) {
+      constractedData["image"] = files.image[0]?.filename
+    }
+    if(files.book) {
+      constractedData["book"] = files.book[0]?.filename
+    }
+    return this.productService.update(id, constractedData);
   }
 
   @Delete(':id')
+  @Roles(Role.Admin)
   async remove(@Param('id') id: string) {
     return this.productService.remove(id);
   }

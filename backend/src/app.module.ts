@@ -2,19 +2,24 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProductModule } from './Product/product.module';
-
 import { JwtModule } from '@nestjs/jwt';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path'
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }), // Load .env globally
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads/images/'),
+      serveRoot: '/static'
+    }),
+    ConfigModule.forRoot({ isGlobal: true }), 
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGO_URI'), // Local DB URI from .env
+        uri: configService.get<string>('MONGO_URI'),
       }),
       inject: [ConfigService],
     }),

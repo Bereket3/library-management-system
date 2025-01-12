@@ -6,7 +6,7 @@ import { Model } from 'mongoose';
 import { SignUpDto } from './dto/signup.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { LoginDto } from './dto/login.dto';
+import { LoginDto, UpdateDto } from './dto/login.dto';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Role } from './enums/role.enums';
 
@@ -39,6 +39,7 @@ export class AuthService {
             email,
             password: hashedPassword,
             role: role === "Librarian" ? Role.Admin : Role.User,
+            isApproved: role === "Librarian" ? true : false,
         });
 
         // Generate JWT token
@@ -92,4 +93,8 @@ export class AuthService {
         }
         return user;
     } 
+
+    async update(id, update: UpdateDto) {
+        return await this.useModel.findByIdAndUpdate(id, update, {new: true})
+    }
 }

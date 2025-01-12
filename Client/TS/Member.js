@@ -85,12 +85,12 @@ if (validateEmail(email)) {
   console.log("Invalid email address.");
 }
 
-// Menu toggle
-const menu = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-menu.addEventListener('click', function () {
-  navLinks.classList.toggle('active');
-});
+// // Menu toggle
+// const menu = document.querySelector('.menu-toggle');
+// const navLinks = document.querySelector('.nav-links');
+// menu.addEventListener('click', function () {
+//   navLinks.classList.toggle('active');
+// });
 
 // Sidebar links
 const sidebarLinks = document.querySelectorAll('.nav-links a');

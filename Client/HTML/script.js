@@ -4,13 +4,6 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-// Example usage:
-const email = "example@domain.com";
-if (validateEmail(email)) {
-  console.log("Valid email address.");
-} else {
-  console.log("Invalid email address.");
-}
 
 // Menu toggle
 const menu = document.querySelector('.menu-toggle');
@@ -85,40 +78,6 @@ toRegistration.addEventListener('click', (e) => {
   loginModal.style.display = 'none';
   registerModal.style.display = 'flex';
 });
-
-// Register Submit button
-// registerSubmit.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   const selectedRole = registerRoleSelect.value;
-
-//   if (selectedRole === 'Librarian' && validateEmail(emailcheck)) {
-//     window.location.href = 'Librarian.html'; 
-//   } 
-//   else if(selectedRole === 'Member' && validateEmail(emailcheck)) {
-//     window.location.href ='Member.html';
-//   } else{
-//     alert('Invalid email address!');
-//   }
-//   alert('Signed up successfully as ' + selectedRole + '!');
-// hideModal(registerModal);
-// });
-
-// Login Submit button
-// loginSubmit.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   const selectedRole = loginRoleSelect.value;
-
-//   if (validateEmail(emailcheck)) {
-//     window.location.href = 'Librarian.html'; 
-//   } 
-//   else if(validateEmail(emailcheck)) {
-//     window.location.href = 'Member.html';
-//   } else{
-//     alert('Invalid email address!');
-//   }
-//   alert('Logged in successfully as ' + selectedRole + '!');
-//   hideModal(loginModal);
-// });
 
 const showMoreBtn = document.getElementById('showMoreBtn');
 const hiddenBooks = document.querySelectorAll('.book-item-hidden');

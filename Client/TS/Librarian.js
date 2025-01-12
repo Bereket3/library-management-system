@@ -8,6 +8,7 @@ const bookCoverInput = document.getElementById('bookCoverInput');
 const saveBookBtn = document.getElementById('saveBookBtn');
 const addBookBtn = document.getElementById('addBookBtn');
 
+
 // Global variables
 let isEditMode = false;
 let currentBookIndex = null;
@@ -130,7 +131,3 @@ window.addEventListener('click', (e) => {
 // Initialize page
 const initialBooks = getBooksFromHTML();
 displayBooks(initialBooks);
-
-// Add event listeners
-addBookBtn.addEventListener('click', openAddBookModal);
-saveBookBtn.addEventListener('click', saveBook);

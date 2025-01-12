@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Member Dashboard</title>
       <link rel="stylesheet" href="../CSS/Member.css">
+      <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
   </head>
   <body>
       <header>
@@ -27,195 +28,132 @@
             </div>
         </section>
             <!-- Profile Section -->
-            <section id="profile-section">
+            <!-- <section id="profile-section">
               <div id="profile">
-                <div class="profile-picture-container"> <img id="profile-picture" src="" alt="Profile Picture"> <label for="profileImageInput" class="upload-button"> <i class="fas fa-camera"></i> </label>
-                  <input type="file" id="profileImageInput" accept="image/*" style="display: none"> </div>
                 <p><strong>Name:</strong> <span id="profile-name">John Doe</span></p>
                 <p><strong>Email:</strong> <span id="profile-email">john.doe@example.com</span></p>
-                <button id="editProfileBtn" class="cta">Edit Profile</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addBook">Edit Profile</button>
               </div>
-            </section>
+            </section> -->
             
-            <div id="profile-modal" class="modal">
-              <div class="modal-content">
-                <h3>Edit Profile</h3>
-                <input type="text" id="editName" placeholder="Enter your name">
-                <input type="email" id="editEmail" placeholder="Enter your email">
-                <input type="file" id="profileImageInput" accept="image/*"> <button id="saveProfileBtn" class="cta">Save</button>
+            <div class="modal fade" id="addBook" tabindex="-1" aria-hidden="true" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-center" id="exampleModalLabel">Create A New Book</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form id="addBookForm" class="form">
+                        <div class="form-group">
+                          <label for="name">Name</label>
+                          <input type="text" required class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter the name of the Author">
+                        </div>
+                        <div class="form-group">
+                          <label for="price">Email</label>
+                          <input type="text" class="form-control" name="price" id="price" placeholder="Enter Price" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn bg-secondary-subtle" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" value="submit" class="btn bg-primary-subtle">Submit</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
               </div>
-            </div>
   
           <section class="book-grid">
-              <div class="container">
-                  <h2>Available Books</h2>
-                  <div class="grid">
-                    <!-- Book Item -->
-                    <div class="book-item" data-pdf="../pdfs/Dreams_and_Stories.pdf">
-                        <img src="../img/book1.png" alt="Book Title 1">
-                        <h3>Dreams and Stories</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item" data-pdf="../pdfs/Flight_Book.pdf">
-                        <img src="../img/book2.png" alt="Book Title 2">
-                        <h3>Flight Book</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item" data-pdf="../pdfs/Life.pdf">
-                        <img src="../img/book3.png" alt="Book Title 3">
-                        <h3>Life</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item" data-pdf="../pdfs/Winter.pdf">
-                        <img src="../img/book4.png" alt="Book Title 4">
-                        <h3>Winter</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item" data-pdf="../pdfs/Be_Modest.pdf">
-                        <img src="../img/book5.png" alt="Book Title 5">
-                        <h3>Be Modest</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item" data-pdf="../pdfs/Report.pdf">
-                        <img src="../img/book6.png" alt="Book Title 6">
-                        <h3>Report</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item" data-pdf="../pdfs/Annual_Report.pdf">
-                        <img src="../img/book7.png" alt="Book Title 7">
-                        <h3>Annual Report</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item" data-pdf="../pdfs/Book_Cover.pdf">
-                        <img src="../img/book8.png" alt="Book Title 8">
-                        <h3>Book Cover</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item" data-pdf="../pdfs/Flight_Book_2.pdf">
-                        <img src="../img/book2.png" alt="Book Title 9">
-                        <h3>Flight Book</h3>
-                        <p>by Author Name</p>
-                    </div>
-                
-                    <!-- Hidden Items -->
-                    <div class="book-item book-item-hidden" data-pdf="../pdfs/Hidden_Annual_Report.pdf">
-                        <img src="../img/book3.png" alt="Book Title 10">
-                        <h3>Annual Report</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item book-item-hidden" data-pdf="../pdfs/Hidden_Book_Cover.pdf">
-                        <img src="../img/book4.png" alt="Book Title 11">
-                        <h3>Book Cover</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item book-item-hidden" data-pdf="../pdfs/Hidden_Flight_Book.pdf">
-                        <img src="../img/book5.png" alt="Book Title 12">
-                        <h3>Flight Book</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item book-item-hidden" data-pdf="../pdfs/Hidden_Dreams_and_Stories.pdf">
-                        <img src="../img/book6.png" alt="Book Title 13">
-                        <h3>Dreams and Stories</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item book-item-hidden" data-pdf="../pdfs/Hidden_Life.pdf">
-                        <img src="../img/book7.png" alt="Book Title 14">
-                        <h3>Life</h3>
-                        <p>by Author Name</p>
-                    </div>
-                    <div class="book-item book-item-hidden" data-pdf="../pdfs/Hidden_Winter.pdf">
-                        <img src="../img/book8.png" alt="Book Title 15">
-                        <h3>Winter</h3>
-                        <p>by Author Name</p>
-                    </div>
+            <div class="container">
+                <h2>Available Books</h2>
+                <div id="bookDisplay" class="grid">
                 </div>
-                
-                      <button class="cta1" id="showMoreBtn">Show More</button>
-                  </div>            
-              </section>
-  
-          <!-- Registration Section -->
-          <div id="register-section" class="modal">
-              <div class="container">
-                  <h1>Register</h1>
-                  <form class="form">
-                      <div class="form-group">
-                          <label for="name">Full Name:</label>
-                          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="email">Email Address:</label>
-                          <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="password">Password:</label>
-                          <input type="password" id="password" name="password" placeholder="Create a password" required>
-                      </div>
-                      <h2>I am a</h2>
-                      <select id="role">
-                          <option value="Member">Member</option>
-                          <option value="Librarian">Librarian</option>
-                      </select>
-                      <button type="submit" id="registerSubmit" class="cta">Register</button>
-                      <p>Already have an account? <a href="#" id="toLogin">Login here</a></p>
-                  </form>
-                  <div class="third-party-login">
-                      <button type="button" class="icon-btn">
-                          <img src="../img/Google.png" alt="Google Logo">
-                          <a href="https://accounts.google.com/"> Login with Google</a>
-                      </button>
-                      <button type="button" class="icon-btn">
-                          <img src="../img/Facebook.png" alt="Facebook Logo">
-                          <a href="https://www.facebook.com/login.php/"> Login with Facebook</a>
-                      </button>
-                      <button type="button" class="icon-btn">
-                          <img src="../img/Linkedin.png" alt="LinkedIn Logo">
-                          <a href="https://www.linkedin.com/login"> Login with LinkedIn</a>
-                      </button>
-                    </div>
-              </div>
-          </div>
-          
-          <!-- Login Section -->
-          <div id="login-section" class="modal">
-              <div class="container">
-                  <h1>Login</h1>
-                  <form class="form">
-                      <div class="form-group">
-                          <label for="email">Email Address:</label>
-                          <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="password">Password:</label>
-                          <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                      </div>
-                      <button type="submit" id="loginSubmit" class="cta">Login</button>
-                      <p>Don't have an account? <a href="#" id="toRegistration">Register here</a></p>
-                  </form>
-                  <div class="third-party-login">
-                      <button type="button" class="icon-btn">
-                          <img src="../img/Google.png" alt="Google Logo">
-                          <a href="https://accounts.google.com/"> Login with Google</a>
-                      </button>
-                      <button type="button" class="icon-btn">
-                          <img src="../img/Facebook.png" alt="Facebook Logo">
-                          <a href="https://www.facebook.com/login.php/"> Login with Facebook</a>
-                      </button>
-                      <button type="button" class="icon-btn">
-                          <img src="../img/Linkedin.png" alt="LinkedIn Logo">
-                          <a href="https://www.linkedin.com/login"> Login with LinkedIn</a>
-                      </button>
-                    </div>
-              </div>
-          </div>
-      </main>        
-          <footer>
-              <div class="container">
-                  <p>&copy; 2025 Library Management System. All rights reserved.</p>
-              </div>
-          </footer>
-          <script src="../TS/Member.js"></script>
-          <!-- <script src="script.ts"></script> -->
+            </div>            
+          </section>
+        </main>        
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Library Management System. All rights reserved.</p>
+            </div>
+        </footer>
+        <script src="../TS/Member.js"></script>
+        <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
       </body>
+      <script>
+        const BASE_URL = "http://localhost:7000/"
+        const LogOutBtn = document.getElementById("LogOut");
+        const BookDisplayLocation = document.getElementById("bookDisplay")
+        const editProfile = document.getElementById("addBookForm")
+
+        editProfile.addEventListener("submit", (e)=> {
+            e.preventDefault()
+            let ProfileData = new FormData(editProfile)
+            let ProfileObjectData = Object.fromEntries(ProfileData)
+            let bodyStr = JSON.stringify(ProfileObjectData)
+            fetch(BASE_URL + "auth/update/", {
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("Token")}`,
+                }
+            })
+            .then(res => res.json())
+            .then(res=> console.log(res))
+        })
+
+        LogOutBtn.addEventListener("click", () => {
+            localStorage.removeItem("Token")
+            window.location.href = "./home.html"
+        })
+        function handelClick (productId) {
+            fetch(BASE_URL + `products/${productId}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("Token")}`,
+                }
+            })
+            .then(async res=> {
+                const jsonData = await res.json()
+                console.log(jsonData)
+                if(jsonData.book) {
+                    window.location.href = BASE_URL + "static/" + jsonData.book
+                }
+                //
+            })
+        } 
+
+        function listBooks() {
+            BookDisplayLocation.innerHTML = ""
+            fetch(BASE_URL + "products/", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("Token")}`,
+                }
+            })
+            .then(async res => {
+                if(res.status === 200) {
+                    const jsonData = await res.json()
+                    jsonData.forEach((product)=>{
+                        let tempElement = `
+                        <div id="product_${product._id}" class="book-item" onclick="handelClick('${product._id}')">
+                            <img class="" src="${BASE_URL + "static/" + product.image}" alt="Book Title 6">
+                            <h3>Report</h3>
+                            <p>by ${product.name}</p>
+                        </div>
+                        `
+                        BookDisplayLocation.innerHTML += tempElement
+                    })
+                }
+                if(BookDisplayLocation.innerHTML.length === 0) {
+                    BookDisplayLocation.innerHTML =  `
+                        <div class="alert alert-success p-5">
+                            <h3 class="text-center"> There is No Book avaliable right now</h3>
+                        </div>`
+                }
+            })
+        }
+        document.addEventListener("DOMContentLoaded", 
+            listBooks()
+        )
+      </script>
   </html>
   

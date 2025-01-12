@@ -12,7 +12,7 @@
         <nav class="navbar">
             <div class="container">
                 <a href="#home" class="logo"><img src="../img/EduShelf_  Managing Books with Ease.jpg" alt="EduShelf"><h1>EduShelf</h1></a>
-                <button class="menu-toggle" aria-label="Toggle navigation">
+                <button class="btn btn-primary menu-toggle" aria-label="Toggle navigation">
                     ☰
                 </button>
                 <ul class="nav-links">
@@ -267,12 +267,12 @@
                         loginForm.reset()
                     } else {
                         await localStorage.setItem('Token', res.data.token)
-                        console.log(loginObjectData.email)
+
                         await fetch(BASE_URL + 'auth/user/', {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
-                                "Authorization": `Bearer ${res.data.token}`,
+                                "Authorization": `Bearer ${localStorage.getItem('Token')}`,
                             },
                             body: JSON.stringify({
                                 email: loginObjectData.email

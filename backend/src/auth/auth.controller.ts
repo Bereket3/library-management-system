@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/signup.dto';
-import { ApprovalDto, EmailDto, LoginDto } from './dto/login.dto';
+import { ApprovalDto, EmailDto, LoginDto, UpdateDto } from './dto/login.dto';
 import { JwtStrategy } from './jwt.startegy';
 import { Roles } from './decorators/roles.decorator';
 import { Role } from './enums/role.enums';
@@ -22,8 +22,9 @@ export class AuthController {
         res.status(200).json(result);
     }
 
-    @Public()
+    
     @Post('/login')
+    @Public()
     async login(
         @Body() loginDto: LoginDto,
         @Res() res: Response,
@@ -53,9 +54,18 @@ export class AuthController {
     }
 
     @Post('/user')
-    @Roles(Role.Admin)
     async getUser(@Body() emailDto : EmailDto, @Res() res: Response) {
         const { email } = emailDto;
         res.status(200).json(await this.authService.getUserByEmail(email))
+    }
+
+    @Patch('/update/:id')
+    async updateUser(
+        @Body() updateDto: UpdateDto,
+        @Res() res: Response,
+        @Param() id: string,
+    ) {
+        const _res = await this.authService.update(id, updateDto)
+        res.status(200).json(_res)
     }
 }

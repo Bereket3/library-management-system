@@ -11,13 +11,20 @@ export class Product extends Document {
   description: string;
 
   @Prop()
-  price: number;
+  price: string;
 
-  @Prop()
+  @Prop({
+    default: null
+  })
   image: string;
 
   @Prop()
   category: string;
+
+  @Prop({
+    default: null
+  })
+  book: string;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

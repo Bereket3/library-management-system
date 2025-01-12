@@ -26,3 +26,13 @@ export class EmailDto {
   @IsString()
   readonly email: string;
 }
+
+export class UpdateDto {
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+}
